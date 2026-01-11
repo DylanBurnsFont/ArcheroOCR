@@ -87,7 +87,7 @@ cd /path/to/ArcheroOCR
 ``` 
 
 ### Output
-In both cases you'll see an output of the names in alphabetical order and scores as well as a CSV file with the same in the output folder of the project directory. You can add a --filename argument to the executables to name the resulting CSV file to your liking.
+In both cases you'll see an output of the names in alphabetical order and scores as well as a CSV file with the same in the output folder of the project directory. You can add a --filename argument to the executables to name the resulting CSV file to your liking. As well as the --debug flag that will display on screen what the program is doing to find the regions of interest. In this mode press any button on the keyboard while focused on any of the images to process the next image.
 
 The command line output shows the amount of hits on the boss. It could be that due to reasons an entry in the leaderboard gets skipped. You should still supervise the output and fill the gaps/errors that may occur. 
 
