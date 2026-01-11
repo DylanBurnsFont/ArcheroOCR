@@ -83,7 +83,7 @@ And run the file with when in the same directory as the script with:
 ``` 
 
 ### Output
-In both cases you'll see an output of the names and scores as well as a CSV file with the same in the output folder of the project directory. You can add a --filename argument to the executables to name the resulting CSV file to your liking.
+In both cases you'll see an output of the names in alphabetical order and scores as well as a CSV file with the same in the output folder of the project directory. You can add a --filename argument to the executables to name the resulting CSV file to your liking.
 
 The command line output shows the amount of hits on the boss. It could be that due to reasons an entry in the leaderboard gets skipped. You should still supervise the output and fill the gaps/errors that may occur. 
 
