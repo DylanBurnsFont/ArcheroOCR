@@ -3,15 +3,15 @@
 If you're tired of tracking the Monster Invasion scores of the guild manually, you can run the script in this project to get all the scores automatically! All you need are screenshots of the Monster invasion leaderboard. 
 
 ## Requirements
-This project uses python. You can use python>=3.9 and python<3.14.
+You can use Python>=3.9 and Python<3.14.
 
 To install Python you can look up tutorials or download it from the [official site](https://www.python.org). **Make sure its one of the compatible versions!** 
 
 It's recommended you also install a package manager. You can use venv or conda. I suggest [conda/miniconda](https://docs.conda.io/projects/conda/en/stable/user-guide/install/index.html). 
 
-After you've installed python and conda, you can create a virtual envirnment, this way you can isolate the original python installation.
+After you've installed python and conda, you can create a virtual environment, this way you can isolate the original Python installation.
 
-Replace \<EnvName> with the desred evironment name and XX wit the desired python version. 
+Replace \<EnvName> with the desired environment name and XX with the desired Python version. 
 ```cmd
 conda create -n <EnvName> python=3.XX
 ```
@@ -29,7 +29,7 @@ Install the necessary packages with:
 pip install -r requirements.txt
 ```
 
-This project uses easyOCR,if you have [CUDA](https://developer.nvidia.com/cuda-toolkit) installed with GPU support it will process the images faster. If not it will default to CPU. It will run slightly slower. To check if CUDA is installed with GPU support run:
+This project uses easyOCR, if you have [CUDA](https://developer.nvidia.com/cuda-toolkit) installed with GPU support it will process the images faster. If not it will default to CPU and will run slightly slower. To check if CUDA is installed with GPU support in Python, run:
 ```python
 import torch
 print(torch.cuda.is_available())
@@ -61,24 +61,28 @@ Modify the --path argument in the [extractScores.ps1](extractScores.ps1) file wi
 Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
 python monsterInvasion.py --path C:\path\to\folder\MonsterInvasionImages\Monday
 ```
-To execute, open a powershell activate your environment go to the directory where the file is located and run the ps1 file.
+To execute, open a powershell, activate your environment, navigate to the directory where the file is located and run the ps1 file.
 ```powershell
+conda ativate <EnvName>
+cd \pathto\ArcheroOCR
 .\extractScores.ps1
 ```
 
 ### For Linux
-Add execution policy to the file [extractScores.sh](extractScores.sh)
-```bash
-chmod +x extractScores.sh
-```
-
 To be sure it runs correctly execute once so that the file is in unix format. 
 ```bash
 dos2unix extractScores.sh
 ```
 
-And run the file with when in the same directory as the script with:
+Make the file [extractScores.sh](extractScores.sh) executable.
 ```bash
+chmod +x extractScores.sh
+```
+
+Activate the environment and run the file from the same directory as the script:
+```bash
+conda activate <EnvName>
+cd /path/to/ArcheroOCR
 ./extractScores.sh
 ``` 
 
@@ -88,13 +92,13 @@ In both cases you'll see an output of the names in alphabetical order and scores
 The command line output shows the amount of hits on the boss. It could be that due to reasons an entry in the leaderboard gets skipped. You should still supervise the output and fill the gaps/errors that may occur. 
 
 ## Character Recognition (OCR)
-This project uses easyOCR. Through testing the reading of the players scores were very accurate. There are however problems with player names especially those with characters not in the latin alphabet. The file [nameCorrection.json](nameCorrection.json) aims to fix the some this issue.
+This project uses easyOCR. Through testing the reading of the players' scores were very accurate. There were, however, problems with player names especially those with characters not in the latin alphabet. The file [nameCorrection.json](nameCorrection.json) aims to fix this problem.
 
-This file is just a dictionary where you can add incorrect readings of a player's name and it's corrected version. If the output of the OCR is coincides with a reading in the file it will correct it to the indicated version. This file is a dictionary so the keys (incorrect names) must not appear more than once in the file. 
+This file is just a dictionary where you can add incorrect readings of a player's name and it's corrected version. If the output of the OCR coincides with a reading in the file it will correct it to the indicated version. This file is a dictionary so the keys (incorrect names) must not appear more than once in the file. 
 
-The entries on the left are the keys (Incorrect names) and the entries on the right are the values (Corrected names)
+The entries on the left are the keys (Incorrect name) and the entries on the right are the values (Correct name)
 
-**Example of the contents of the file**
+**Example of file structure and content**
 ```json
 {
     "N4m31": "NAmE1",
@@ -105,4 +109,4 @@ The entries on the left are the keys (Incorrect names) and the entries on the ri
 }
 ```
 
-Run the program note the incorrect entries and add it to this file so the next time they are corrected. **If you don't want to do this just leave the file as is DO NOT delete it**. 
+Run the program, note the incorrect entries and add it to this file so the next time they are corrected. **If you don't want to do this just leave the file as is DO NOT delete it**. 
