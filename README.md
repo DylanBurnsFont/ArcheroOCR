@@ -5,6 +5,25 @@ If you're tired of tracking the Monster Invasion scores of the guild manually, y
 ## Requirements
 This project uses python. You can use python>=3.9 and python<3.14.
 
+To install Python you can look up tutorials or download it from the [official site](https://www.python.org). **Make sure its one of the compatible versions!** 
+
+It's recommended you also install a package manager. You can use venv or conda. I suggest [conda/miniconda](https://docs.conda.io/projects/conda/en/stable/user-guide/install/index.html). 
+
+After you've installed python and conda, you can create a virtual envirnment, this way you can isolate the original python installation.
+
+Replace \<EnvName> with the desred evironment name and XX wit the desired python version. 
+```cmd
+conda create -n <EnvName> python=3.XX
+```
+
+Once its created just run
+```cmd
+conda activate <EnvName>
+```
+
+In this environment we can now install the necessary packages and run the code. 
+If you open a new terminal you'll have to activate the environment once again on each terminal. 
+
 Install the necessary packages with: 
 ```shell
 pip install -r requirements.txt
