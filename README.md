@@ -35,7 +35,7 @@ pathToFolder/
 ```
 
 ### For Windows
-Modify the --path argument in the [extractScores.ps1](ArcheroOCR/extractScores.ps1) file with your path to the folder with the images.
+Modify the --path argument in the [extractScores.ps1](extractScores.ps1) file with your path to the folder with the images.
 
 **Content example of the file**:
 ```powershell
@@ -48,7 +48,7 @@ To execute, open a powershell activate your environment go to the directory wher
 ```
 
 ### For Linux
-Add execution policy to the file [extractScores.sh](ArcheroOCR/extractScores.sh)
+Add execution policy to the file [extractScores.sh](extractScores.sh)
 ```bash
 chmod +x extractScores.sh
 ```
@@ -69,7 +69,7 @@ In both cases you'll see an output of the names and scores as well as a CSV file
 The command line output shows the amount of hits on the boss. It could be that due to reasons an entry in the leaderboard gets skipped. You should still supervise the output and fill the gaps/errors that may occur. 
 
 ## Character Recognition (OCR)
-This project uses easyOCR. Through testing the reading of the players scores were very accurate. There are however problems with player names especially those with characters not in the latin alphabet. The file [nameCorrection.json](ArcheroOCR/nameCorrection.jsn) aims to fix the some this issue.
+This project uses easyOCR. Through testing the reading of the players scores were very accurate. There are however problems with player names especially those with characters not in the latin alphabet. The file [nameCorrection.json](nameCorrection.json) aims to fix the some this issue.
 
 This file is just a dictionary where you can add incorrect readings of a player's name and it's corrected version. If the output of the OCR is coincides with a reading in the file it will correct it to the indicated version. This file is a dictionary so the keys (incorrect names) must not appear more than once in the file. 
 
