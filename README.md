@@ -86,6 +86,16 @@ cd /path/to/ArcheroOCR
 ./extractScores.sh
 ``` 
 
+### List of command line arguments 
+- ```--path``` path to the folder containing the images. **Required**
+- ```--correctionsFile``` path to the .json file containing the name corrections.
+- ```--guildMembersFile``` path to the .json file containing the names of all members of the guild.
+- ```--sortBy``` can be one of the following: [name_asc, name_desc, score_asc, score_desc] to sort the results according to name/score and in ascending or descending order. 
+- ```--fileName``` how you'd like the output file to be named
+- ```--debug``` shows what image processing and process of what is happening
+
+Only the first argument is required all others are optional. 
+
 ### Output
 In both cases you'll see an output of the names in alphabetical order and scores as well as a CSV file with the same in the output folder of the project directory. You can add a --filename argument to the executables to name the resulting CSV file to your liking. As well as the --debug flag that will display on screen what the program is doing to find the regions of interest. In this mode press any button on the keyboard while focused on any of the images to process the next image.
 
@@ -96,9 +106,9 @@ This project uses easyOCR. Through testing the reading of the players' scores we
 
 This file is just a dictionary where you can add incorrect readings of a player's name and it's corrected version. If the output of the OCR coincides with a reading in the file it will correct it to the indicated version. This file is a dictionary so the keys (incorrect names) must not appear more than once in the file. 
 
-The entries on the left are the keys (Incorrect name) and the entries on the right are the values (Correct name)
+The entries on the left are the keys (Incorrect name) and the entries on the right are the values (Correct name).
 
-**Example of file structure and content**
+**Example of file structure and content of nameCorrections.json**
 ```json
 {
     "N4m31": "NAmE1",
@@ -109,7 +119,7 @@ The entries on the left are the keys (Incorrect name) and the entries on the rig
 }
 ```
 
-Run the program, note the incorrect entries and add it to this file so the next time they are corrected. **If you don't want to do this just leave the file as is DO NOT delete it**. 
+You can als include all your guild members in the [guildMembers.json](guildMembers.json) file. If you do so and pass it as a anrgument, all members that didn't appear on the leaderboard will appear with 0 damage. **If the OCR read the name incorrectly, that person will appear twice, once with the incorrect name with the damage and again with the correct name and 0 damage.** Make sure to revise and update the [guildNameCorrection.json](guildNameCorrection.json) file so this happens less and less. 
 
 ## TODO
 - Add name corrections file as cli
