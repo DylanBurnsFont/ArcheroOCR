@@ -25,7 +25,10 @@ def createImageMask(image):
 
 def main(args):
     MI_SCORES = {}
-    NAME_CORRECTION = loadJsonFile("nameCorrection.json")
+    if args.correctionsFile:
+        NAME_CORRECTION = loadJsonFile(args.correctionsFile)
+    if args.guildMembersFile:
+        GUILD_MEMBERS = loadJsonFile(args.guildMembersFile)
 
     reader = easyocr.Reader(['en'])
 
@@ -162,7 +165,7 @@ def main(args):
                 DEBUG_SCORES[correctedName] = value
             except ValueError:
                 continue
-
+        
         if debug:
             for name, score in DEBUG_SCORES.items():
                 print(f"{name} — {score}")
@@ -174,12 +177,26 @@ def main(args):
             cv2.imshow(f'Mask {imageName.split(".")[0]}', mask)
             cv2.waitKey(0)
             cv2.destroyAllWindows()
-            
-    MI_SCORES = dict(sorted(MI_SCORES.items(), key=lambda x: x[0].lower()))
+
+    noHit = 0
+    if GUILD_MEMBERS:
+       for member in GUILD_MEMBERS:
+           if member not in MI_SCORES:
+               MI_SCORES[member] = "0M"
+               noHit += 1
+
+    if args.sortBy == "name_asc":
+        MI_SCORES = dict(sorted(MI_SCORES.items(), key=lambda x: x[0].lower()))
+    elif args.sortBy == "name_desc":
+        MI_SCORES = dict(sorted(MI_SCORES.items(), key=lambda x: x[0].lower(), reverse=True))
+    elif args.sortBy == "score_asc":
+        MI_SCORES = dict(sorted(MI_SCORES.items(), key=lambda x: float(x[1][:-1]) * {'M':1e6, 'B':1e9, 'T':1e12}.get(x[1][-1], 1)))
+    elif args.sortBy == "score_desc":
+        MI_SCORES = dict(sorted(MI_SCORES.items(), key=lambda x: float(x[1][:-1]) * {'M':1e6, 'B':1e9, 'T':1e12}.get(x[1][-1], 1), reverse=True))
     for name, score in MI_SCORES.items():
         print(f"{name} — {score}")
 
-    print(f"Total hits recorded: {len(MI_SCORES)}")
+    print(f"Total hits recorded: {len(MI_SCORES) - noHit}, No hits: {noHit}")
 
     writeCSV(MI_SCORES, args.fileName)
 
@@ -188,6 +205,9 @@ if __name__ == "__main__":
     parser.add_argument("-h", "--help", action="help", help="Script to automatically extract Monster Invasion scores from Archero2 screenshots using OCR.")
     parser.add_argument("--debug", action="store_true", help="Enable debug mode with detailed output and images.")
     parser.add_argument("--path", type=str, required=True, help="Path to the folder containing images.")
+    parser.add_argument("--sortBy", type=str, choices=["name_asc", "name_desc", "score_asc", "score_desc"], default="name_asc", help="Sort output by 'name' or 'score' ascending or descending. Default is 'name_asc'.")
+    parser.add_argument("--correctionsFile", type=str, default=None, help="JSON file containing name corrections.")
+    parser.add_argument("--guildMembersFile", type=str, default=None, help="JSON file containing all guild members.")
     parser.add_argument("--fileName", type=str, default="monster_invasion_scores.csv", help="Output CSV file name.")
     args = parser.parse_args()
     main(args)
