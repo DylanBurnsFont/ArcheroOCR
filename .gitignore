@@ -4,3 +4,5 @@ __pycache__/
 testExtractScores.ps1
 guildNameCorrection.json
 testMonsterInvasion.py
+*GM.json
+*NC.json
