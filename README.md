@@ -112,6 +112,6 @@ The entries on the left are the keys (Incorrect name) and the entries on the rig
 Run the program, note the incorrect entries and add it to this file so the next time they are corrected. **If you don't want to do this just leave the file as is DO NOT delete it**. 
 
 ## TODO
-Add name corrections file as cli
-Add argument to chose how you want the output sorted name (ascending, descending) score (ascending descending)
-Deploy to website
+- Add name corrections file as cli
+- Add argument to chose how you want the output sorted name (ascending, descending) score (ascending descending)
+- Add file with guild members so that output accounts for everyone even if they didn't attack
