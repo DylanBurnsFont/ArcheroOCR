@@ -3,3 +3,4 @@ TestImages/
 __pycache__/
 testExtractScores.ps1
 guildNameCorrection.json
+testMonsterInvasion.py
