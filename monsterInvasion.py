@@ -25,6 +25,8 @@ def createImageMask(image):
 
 def main(args):
     MI_SCORES = {}
+    NAME_CORRECTION = {}
+    GUILD_MEMBERS = []
     if args.correctionsFile:
         NAME_CORRECTION = loadJsonFile(args.correctionsFile)
     if args.guildMembersFile:
