@@ -1,6 +1,7 @@
 import cv2
 import pandas as pd
 import os
+import json
 
 def writeCSV(data, filename="monster_invasion_scores.csv"):
     """
@@ -9,6 +10,8 @@ def writeCSV(data, filename="monster_invasion_scores.csv"):
     :param data: Dictionary containing the data to write
     :param filename: Name of the output CSV file
     """
+    if not filename.endswith(".csv"):
+        filename += ".csv"
 
     df = pd.DataFrame(list(data.items()), columns=['Name', 'Score'])
     df.to_csv(os.path.join("output", filename), index=False)
@@ -139,7 +142,7 @@ def loadJsonFile(filePath):
 
     :return: Data loaded from the JSON file
     """
-    import json
-    with open(filePath, 'r') as f:
-        data = json.load(f)
-    return data
+    if filePath:
+        with open(filePath, 'r') as f:
+            data = json.load(f)
+        return data
