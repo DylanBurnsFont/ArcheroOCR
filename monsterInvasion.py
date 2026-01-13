@@ -27,6 +27,9 @@ def main(args):
     MI_SCORES = {}
     NAME_CORRECTION = {}
     GUILD_MEMBERS = []
+
+    scoreMultipliers = {'K':0.000001,'M': 0.001, 'B': 1, 'T': 1000}
+
     if args.correctionsFile:
         NAME_CORRECTION = loadJsonFile(args.correctionsFile)
     if args.guildMembersFile:
@@ -155,16 +158,22 @@ def main(args):
             value = pair[1].replace('O', '0')
             # Make sure the value excluding the M/B/T is a valid float
             try:
-                float(value[:-1])
+                numScore = float(value[:-1])
                 if value[-1] == '8':
                     value = value[:-1] + 'B'
                 elif value[-1] == '1' or value[-1] == '7' or value[-1] == 't':
                     value = value[:-1] + 'T'
-                
+                mult = scoreMultipliers.get(value[-1], None)
                 # Get corrected name if it doesn't exist default back to what OCR read
                 correctedName = NAME_CORRECTION.get(pair[0], pair[0])
-                MI_SCORES[correctedName] = value
-                DEBUG_SCORES[correctedName] = value
+                if mult is None:
+                    MI_SCORES[correctedName] = "Error in score"
+                    DEBUG_SCORES[correctedName] = "Error in score"
+                else:
+                    finalScore = round(numScore * mult, 6)
+                    MI_SCORES[correctedName] = finalScore
+                    DEBUG_SCORES[correctedName] = finalScore
+
             except ValueError:
                 continue
         
@@ -184,7 +193,7 @@ def main(args):
     if GUILD_MEMBERS:
        for member in GUILD_MEMBERS:
            if member not in MI_SCORES:
-               MI_SCORES[member] = "0M"
+               MI_SCORES[member] = 0
                noHit += 1
 
     if args.sortBy == "name_asc":
