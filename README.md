@@ -101,6 +101,12 @@ In both cases you'll see an output of the names in alphabetical order and scores
 
 The command line output shows the amount of hits on the boss. It could be that due to reasons an entry in the leaderboard gets skipped. You should still supervise the output and fill the gaps/errors that may occur. 
 
+The scores will appear in the billions. IE:
+- 1K = 0.000001
+- 1M = 0.001
+- 1B = 1
+- 1T = 1000
+
 ## Character Recognition (OCR)
 This project uses easyOCR. Through testing the reading of the players' scores were very accurate. There were, however, problems with player names especially those with characters not in the latin alphabet. The file [nameCorrection.json](nameCorrection.json) aims to fix this problem.
 
