@@ -119,7 +119,7 @@ The entries on the left are the keys (Incorrect name) and the entries on the rig
 }
 ```
 
-You can als include all your guild members in the [guildMembers.json](guildMembers.json) file. If you do so and pass it as a anrgument, all members that didn't appear on the leaderboard will appear with 0 damage. **If the OCR read the name incorrectly, that person will appear twice, once with the incorrect name with the damage and again with the correct name and 0 damage.** Make sure to revise and update the [guildNameCorrection.json](guildNameCorrection.json) file so this happens less and less. 
+You can als include all your guild members in the [guildMembers.json](guildMembers.json) file. If you do so and pass it as a anrgument, all members that didn't appear on the leaderboard will appear with 0 damage. **If the OCR read the name incorrectly, that person will appear twice, once with the incorrect name with the damage and again with the correct name and 0 damage.** Make sure to revise and update the [guildNameCorrection.json](nameCorrection.json) file so this happens less and less. 
 
 ## Other info
 The script also works for the guilds leaderboard if that is somethin you're interested in tracking. For this either remove the correctionsFile and guildMembers file or create specific ones for the guilds.
